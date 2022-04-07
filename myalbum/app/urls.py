@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import resize, home
+from .views import resize
 
 urlpatterns = [
-    # path('', home, name='home'),
     path('resize', resize, name='resize'),
 ]
