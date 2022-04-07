@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import resize_picture
+from .views import resize, home
 
 urlpatterns = [
-    path('resize', resize_picture, name='resize_picture'),
+    # path('', home, name='home'),
+    path('resize', resize, name='resize'),
 ]
