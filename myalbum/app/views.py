@@ -8,13 +8,17 @@ def resize(request):
     if request.method == 'POST':
         form = AddForm(request.POST, request.FILES)
         print(request.POST['width'])
-        # print(request.FILES)
+        photo = request.FILES['photo']
+        print(photo.size, '@@@@@')
+        print(request.FILES, '!!!!')
         if form.is_valid():
 
             if request.POST['width'] and request.POST['height']:
                 width, height = request.POST['width'], request.POST['height']
+
             else:
                 pass
+
 
 
             form.save()
