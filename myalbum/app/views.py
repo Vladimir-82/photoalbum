@@ -15,16 +15,20 @@ def resize(request):
             width, height = image.size
             if request.POST['width'] and request.POST['height']:
                 width_new, height_new = request.POST['width'], request.POST['height']
+
             else:
                 width_new = request.POST['width']
                 height_new = (int(width) / int(request.POST['width'])) * int(height)
+
+
+
             form.save()
 
             img_obj = form.instance
             return render(request, 'app/resize.html', {'form': form, 'img_obj': img_obj,
                                                        'width': width_new, 'height': height_new,
-                                                        # 'im_resized': im_resized
                                                        })
+
     else:
         form = AddForm()
     return render(request, 'app/resize.html', {'form': form})
