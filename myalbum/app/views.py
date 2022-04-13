@@ -27,20 +27,16 @@ def resize(request):
 
 
             form.save()
-            p = App.objects.latest('created_at')
+            photo_obj = App.objects.latest('created_at')
 
             im = image.resize((int(width_new), int(height_new)), Image.ANTIALIAS)
             buffer = BytesIO()
             im.save(fp=buffer, format='webp')
-            name = f'{hash(p.photo)}_{width_new}x{height_new}.webp'
+            name = f'{hash(photo_obj.photo)}_{width_new}x{height_new}.webp'
 
-            p.photo_mod.save(name=name, content=ContentFile(buffer.getvalue()), save=False)
+            photo_obj.photo_mod.save(name=name, content=ContentFile(buffer.getvalue()), save=False)
 
-
-            img_obj = form.instance
-            return render(request, 'app/resize.html', {'form': form, 'img_obj': img_obj,
-                                                       'width': width_new, 'height': height_new,
-                                                       })
+            return render(request, 'app/resize.html', {'photo_obj': photo_obj})
 
     else:
         form = AddForm()

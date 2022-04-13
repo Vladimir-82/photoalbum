@@ -14,10 +14,10 @@
   <button type="submit">Upload</button>
 </form>
 
-{% if img_obj %}
-  <h3> Succesfully converted : {{img_obj.title}} </h3>
-    <img src="{{ img_obj.photo.url}}" alt="connect" width="{{img_obj.width}}" height="{{img_obj.height}}"><br>
-
+{% if photo_obj %}
+  <h3> Succesfully converted : {{photo_obj.title}} </h3>
+    <img src="{{ photo_obj.photo_mod.url}}" alt="connect"><br>
+    <a href="{{photo_obj.photo_mod.url}}" target="_blank"> Download file </a>
 {% endif %}
 
 </body>
