@@ -22,7 +22,6 @@ def resize(request):
             photos = App.objects.all()
             for ph in photos:
                 sizes.append(ph.photo_mod.size)
-            print(sizes, '###')
 
 
             image = Image.open(photo)
@@ -47,13 +46,8 @@ def resize(request):
 
             photo_obj.photo_mod.save(name=name, content=ContentFile(buffer.getvalue()), save=False)
             photo_obj.save()
-            if photo_obj.photo_mod.size not in sizes:
-
-                print(photo_obj.photo.size, '@@@')
-            else:
+            if photo_obj.photo_mod.size in sizes:
                 return HttpResponse('You have already converted this file!!!')
-
-
             return render(request, 'app/resize.html', {'photo_obj': photo_obj})
 
     else:
