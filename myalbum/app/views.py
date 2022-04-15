@@ -7,6 +7,7 @@ from .models import App
 
 from PIL import Image
 from io import BytesIO
+import uuid
 
 
 
@@ -42,8 +43,10 @@ def resize(request):
             im = image.resize((int(width_new), int(height_new)), Image.ANTIALIAS)
             buffer = BytesIO()
             im.save(fp=buffer, format='webp')
-            name = f'{hash(photo_obj.photo)}_{width_new}x{height_new}.webp'
-
+            hash = uuid.uuid3(uuid.NAMESPACE_DNS, photo_obj.title)
+            print(hash)
+            name = f'{hash}_{width_new}x{height_new}.webp'
+            print(name)
             photo_obj.photo_mod.save(name=name, content=ContentFile(buffer.getvalue()), save=False)
             photo_obj.save()
             if photo_obj.photo_mod.size in sizes:
