@@ -1,3 +1,8 @@
+from PIL import Image
+from io import BytesIO
+
+import uuid
+
 from django.shortcuts import render
 from django.core.files.base import ContentFile
 from django.http import HttpResponse
@@ -7,12 +12,6 @@ from rest_framework.response import Response
 from .forms import AddForm
 from .models import App
 from .serializers import AppSerializer
-
-from PIL import Image
-from io import BytesIO
-import uuid
-
-
 
 
 def resize(request):
@@ -55,8 +54,6 @@ def resize(request):
     return render(request, 'app/resize.html', {'form': form})
 
 
-
-
 class ApiResize(generics.ListCreateAPIView):
     queryset = App.objects.all()
     serializer_class = AppSerializer
@@ -64,7 +61,6 @@ class ApiResize(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         photo = request.data['photo']
         print(photo, 'photo')
-
 
         sizes = []
         photos = App.objects.all()
