@@ -1,0 +1,1 @@
+Image resizing service with Django and Django REST
