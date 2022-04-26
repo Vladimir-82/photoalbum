@@ -60,13 +60,11 @@ class ApiResize(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         photo = request.data['photo']
-        print(photo, 'photo')
 
         sizes = []
         photos = App.objects.all()
         for ph in photos:
             sizes.append(ph.photo_mod.size)
-        print(photos, 'photos')
         serializer = AppSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -82,7 +80,6 @@ class ApiResize(generics.ListCreateAPIView):
 
 
         photo_obj = App.objects.latest('created_at')
-        print(photo_obj, 'photo_obj')
 
         im = image.resize((int(width_new), int(height_new)), Image.ANTIALIAS)
         buffer = BytesIO()
